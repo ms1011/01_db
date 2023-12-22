@@ -1,0 +1,66 @@
+-- distinct
+-- distinct는 해당 컬럼의 종류를 보여준다
+SELECT
+		 distinct category_code
+  FROM tbl_menu;
+
+-- distinct 사용 시에는 일반 컬럼을 사용할 수 없다(distint 무의미)
+SELECT
+		 distinct category_code
+	  , menu_name
+  FROM tbl_menu;
+
+-- null 값을 포함한 컬럼의 distinct
+SELECT
+		 DISTINCT ref_category_code
+  FROM tbl_category;
+
+-- null을 나중으로 보내는 정렬을 해보자
+-- 모든 ref_category_code를 조회하고 정렬 (느림)
+SELECT
+		 DISTINCT ref_category_code
+  FROM tbl_category
+ ORDER BY 1 DESC;
+ 
+-- distinct 조회한 결과를 정렬 (빠름)
+SELECT
+		 DISTINCT ref_category_code 'rcc'
+  FROM tbl_category
+ ORDER BY -rcc DESC ;
+
+-- 기본 정렬의 개념(순번이나 별칭을 사용하지 않고는 정렬할 수 없다.)은 syntax에러 발생
+SELECT
+		 DISTINCT ref_category_code
+  FROM tbl_category
+ ORDER BY DISTINCT ref_category_code DESC;	-- 에러 발생
+
+-- -----------------------------------------------------------
+-- 컬럼 두개 이상도 distinct로 묶을 수는 있지만 좋은 형태는 아니다.
+-- group by절을 통해 중복 제거를 추천
+SELECT
+		 DISTINCT category_code, orderable_status
+  FROM tbl_menu;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
